@@ -53,7 +53,7 @@ class PingServer(InternalDevice):
     def __init__(self, host):
         self.host = host
         super(PingServer, self).__init__()
-        self._fire_events()
+        self._fire_events(self.pin_factory.ticks(), None)
 
     def __repr__(self):
         return '<gpiozero.PingServer host="%s">' % self.host
@@ -121,7 +121,7 @@ class CPUTemperature(InternalDevice):
         self.min_temp = min_temp
         self.max_temp = max_temp
         self.threshold = threshold
-        self._fire_events()
+        self._fire_events(self.pin_factory.ticks(), None)
 
     def __repr__(self):
         return '<gpiozero.CPUTemperature temperature=%.2f>' % self.temperature
@@ -152,6 +152,7 @@ class CPUTemperature(InternalDevice):
         :attr:`threshold`.
         """
         return self.temperature > self.threshold
+
 
 class LoadAverage(InternalDevice):
     """
@@ -207,7 +208,7 @@ class LoadAverage(InternalDevice):
             15: 2,
         }[minutes]
         super(LoadAverage, self).__init__()
-        self._fire_events()
+        self._fire_events(self.pin_factory.ticks(), None)
 
     def __repr__(self):
         return '<gpiozero.LoadAverage load average=%.2f>' % self.load_average
@@ -279,7 +280,7 @@ class TimeOfDay(InternalDevice):
         self.start_time = start_time
         self.end_time = end_time
         self.utc = utc
-        self._fire_events()
+        self._fire_events(self.pin_factory.ticks(), None)
 
     def __repr__(self):
         return '<gpiozero.TimeOfDay active between %s and %s %s>' % (
